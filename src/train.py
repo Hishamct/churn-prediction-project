@@ -1,3 +1,6 @@
+"""
+Training pipeline for churn prediction model.
+"""
 import pandas as pd
 import joblib
 # import subprocess
@@ -47,12 +50,13 @@ for col in categorical_cols:
 # ---------------------------
 # Split Data
 # ---------------------------
-X = df.drop("Churn", axis=1)
-y = df["Churn"]
+features = df.drop("Churn", axis=1)
+target = df["Churn"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
+
+x_train, x_test, y_train, y_test = train_test_split(
+    features,
+    target,
     test_size=0.2,
     random_state=42
 )
@@ -62,12 +66,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 # ---------------------------
 model = LogisticRegression(max_iter=1000)
 
-model.fit(X_train, y_train)
+model.fit(x_train, y_train)
 
 # ---------------------------
 # Evaluate
 # ---------------------------
-predictions = model.predict(X_test)
+predictions = model.predict(x_test)
 
 accuracy = accuracy_score(
     y_test,
