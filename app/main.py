@@ -6,7 +6,10 @@ import logging
 
 app = FastAPI()
 
-model = joblib.load("model.pkl")
+try:
+    model = joblib.load("model.pkl")
+except FileNotFoundError:
+    model = None
 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,9 +27,12 @@ def predict(data: InputData):
 
     features = data.features
 
-    prediction = model.predict(
-        [features]
-    )
+    if model is None:
+        return {
+            "error": "Model not loaded"
+        }
+
+    prediction = model.predict([features])
 
     logging.info(
         f"Input: {features}"
