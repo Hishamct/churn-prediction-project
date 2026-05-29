@@ -206,4 +206,4 @@ Purpose:
 
 ## Conclusion
 
-This project demonstrates an end-to-end production-style MLOps workflow combining machine learning, software engineering, testing, version control, CI/CD, deployment, and monitoring practices.
+This project demonstrates enterprise-level ML engineering practices using MLOps tools.
